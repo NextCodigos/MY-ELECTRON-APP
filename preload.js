@@ -12,3 +12,10 @@ window.addEventListener("DOMContentLoaded", () => {
     replaceText(`${dependency}-version`, process.versions[dependency]);
   }
 });
+const { contextBridge } = require("electron/renderer");
+
+contextBridge.exposeInMainWorld("versions", {
+  node: () => process.versions.node,
+  chrome: () => process.versions.chrome,
+  electron: () => process.versions.electron,
+});
